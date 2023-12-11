@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="UMnoUJ" name="SimpleCombFilter" projectType="audioplug" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
+  <MAINGROUP id="Bmo7eJ" name="SimpleCombFilter">
+    <GROUP id="{02D330D9-09D7-4A02-9BD9-0B967C3E5F76}" name="Source">
+      <FILE id="REAZ7y" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="PF7v7L" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="waHAiI" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="nDBIcJ" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
+  <EXPORTFORMATS>
+    <VS2022 targetFolder="Builds/VisualStudio2022">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="SimpleCombFilter"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="SimpleCombFilter"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../../Users/Joey/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../Users/Joey/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../Users/Joey/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../../Users/Joey/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../Users/Joey/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../../Users/Joey/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../../Users/Joey/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../Users/Joey/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../../Users/Joey/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../Users/Joey/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../Users/Joey/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../Users/Joey/JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2022>
+  </EXPORTFORMATS>
+</JUCERPROJECT>
