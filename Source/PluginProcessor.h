@@ -53,7 +53,13 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+
 private:
+    juce::AudioBuffer<float> delayBuffer;
+    int readPosition = 0;
+    int writePosition = 0;
+    const int maxDelayInSamples = 44100;  // Adjust this according to your desired delay length
+    const float feedbackFactor = 0.5;     // Adjust this for feedback amount
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SimpleCombFilterAudioProcessor)
 };

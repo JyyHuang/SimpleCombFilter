@@ -95,6 +95,10 @@ void SimpleCombFilterAudioProcessor::prepareToPlay (double sampleRate, int sampl
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+    delayBuffer.setSize(1, maxDelayInSamples, false, true, true);
+    delayBuffer.clear();
+    writePosition = 0;
+    
 }
 
 void SimpleCombFilterAudioProcessor::releaseResources()
@@ -131,31 +135,36 @@ bool SimpleCombFilterAudioProcessor::isBusesLayoutSupported (const BusesLayout& 
 
 void SimpleCombFilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
-    juce::ScopedNoDenormals noDenormals;
-    auto totalNumInputChannels  = getTotalNumInputChannels();
-    auto totalNumOutputChannels = getTotalNumOutputChannels();
+    const int numSamples = buffer.getNumSamples();
+        const int numChannels = buffer.getNumChannels();
 
-    // In case we have more outputs than inputs, this code clears any output
-    // channels that didn't contain input data, (because these aren't
-    // guaranteed to be empty - they may contain garbage).
-    // This is here to avoid people getting screaming feedback
-    // when they first compile a plugin, but obviously you don't need to keep
-    // this code if your algorithm always overwrites all the output channels.
-    for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
-        buffer.clear (i, 0, buffer.getNumSamples());
+        for (int channel = 0; channel < numChannels; ++channel)
+        {
+            float* channelData = buffer.getWritePointer(channel);
 
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    // Make sure to reset the state if your inner loop is processing
-    // the samples and the outer loop is handling the channels.
-    // Alternatively, you can process the samples with the channels
-    // interleaved by keeping the same state.
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        auto* channelData = buffer.getWritePointer (channel);
+            for (int i = 0; i < numSamples; ++i)
+            {
+                float inputSample = channelData[i];
+                float outputSample = delayBuffer.getSample(0, readPosition);
+                
+                // Apply feedback
+                float feedback = outputSample * feedbackFactor;
+                delayBuffer.setSample(0, writePosition, inputSample + feedback);
 
-        // ..do something to the data...
-    }
+                // Output the delayed sample
+                channelData[i] = outputSample;
+
+                // Update read and write positions
+                ++readPosition;
+                ++writePosition;
+
+                if (readPosition >= maxDelayInSamples)
+                    readPosition = 0;
+
+                if (writePosition >= maxDelayInSamples)
+                    writePosition = 0;
+            }
+        }
 }
 
 //==============================================================================
